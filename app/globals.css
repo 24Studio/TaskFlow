@@ -1,0 +1,506 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    /* Vision OS inspired dark mode */
+    --background: 220 20% 10%;
+    --foreground: 210 20% 98%;
+
+    --card: 220 20% 13%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 220 20% 13%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 20% 10%;
+
+    --secondary: 220 20% 16%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 220 20% 16%;
+    --muted-foreground: 220 20% 65%;
+
+    --accent: 220 20% 16%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 70% 65%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 20% 16%;
+    --input: 220 20% 16%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Vision OS inspired styles */
+.glass {
+  @apply bg-white/20 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-sm;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.glass-card {
+  @apply bg-white/40 dark:bg-black/30 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.glass-input {
+  @apply bg-white/30 dark:bg-black/30 backdrop-blur-xl border border-white/30 dark:border-white/10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced hover effects */
+.glass:hover,
+.glass-card:hover {
+  @apply bg-white/30 dark:bg-black/40;
+}
+
+.glass-input:focus {
+  @apply bg-white/40 dark:bg-black/40 border-primary/50;
+}
+
+/* Animation classes */
+.animate-in {
+  animation: fade-in 0.3s ease-out, slide-in 0.3s ease-out;
+}
+
+.animate-out {
+  animation: fade-out 0.3s ease-out, slide-out 0.3s ease-out;
+}
+
+.scale-in {
+  animation: scale-in 0.3s ease-out;
+}
+
+.scale-out {
+  animation: scale-out 0.3s ease-out;
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Dark mode transition */
+.dark-transition {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/50;
+}
+
+/* Improved card transitions */
+.card-transition {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.card-transition:hover {
+  transform: translateY(-2px);
+  @apply shadow-lg;
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize rendering */
+.optimize-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Calendar day styles - optimized */
+.rdp-day_today:not(.rdp-day_outside) {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Enhanced calendar styles for better visibility */
+.rdp-day {
+  font-weight: 700 !important;
+  color: hsl(var(--foreground)) !important;
+  font-size: 1rem !important;
+  background-color: transparent !important;
+}
+
+.rdp-day_outside {
+  opacity: 0.5 !important;
+}
+
+.rdp-caption_label {
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.rdp-head_cell {
+  font-weight: 700 !important;
+  color: hsl(var(--foreground)) !important;
+  font-size: 0.9rem !important;
+}
+
+.rdp-nav_button {
+  color: hsl(var(--foreground)) !important;
+}
+
+.rdp-months {
+  background-color: transparent !important;
+}
+
+.rdp-table {
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+.rdp-cell {
+  padding: 4px !important;
+}
+
+.rdp-button {
+  width: 100% !important;
+  height: 40px !important;
+  border-radius: 12px !important;
+  font-size: 1rem !important;
+  background-color: transparent !important;
+}
+
+.rdp-button:hover {
+  background-color: hsl(var(--primary) / 0.1) !important;
+}
+
+.rdp-day_selected {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.rdp-day_today {
+  border: 2px solid hsl(var(--primary)) !important;
+  font-weight: 800 !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .glass-card {
+    @apply p-3;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply text-base;
+  }
+
+  .rdp-button {
+    height: 36px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .rdp-day {
+    font-size: 0.9rem !important;
+  }
+
+  /* Improve tap targets for mobile */
+  button,
+  a,
+  .rdp-button,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Fix spacing on mobile */
+  .p-4 {
+    @apply p-3;
+  }
+
+  .gap-4 {
+    @apply gap-2;
+  }
+}
+
+/* Improved text contrast */
+.text-muted-foreground {
+  @apply font-medium;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Add to calendar button highlight with stronger contrast */
+.add-to-calendar-btn {
+  @apply relative overflow-hidden;
+}
+
+.add-to-calendar-btn::after {
+  content: "";
+  @apply absolute inset-0 bg-primary/30 animate-pulse;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Mobile sidebar improvements */
+@media (max-width: 768px) {
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Integration filter buttons */
+button[variant="default"] {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+/* Make integration buttons more visible */
+.glass-card .bg-primary {
+  @apply text-white shadow-md;
+}
+
+/* Background image handling */
+body.has-bg-image {
+  background-color: transparent !important;
+}
+
+/* Adjust glass effect for background images */
+body.has-bg-image .glass-card {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(10px);
+}
+
+body.has-bg-image.dark .glass-card {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Ensure content is readable on background images */
+body.has-bg-image .text-foreground {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+body.has-bg-image.dark .text-foreground {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Background image support */
+:root {
+  --app-background: none;
+}
+
+body {
+  background: var(--app-background);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Calendar styles */
+.calendar-container {
+  display: block !important;
+  width: 100%;
+}
+
+/* Space customization */
+.space-icon-selector {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.space-color-selector {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.space-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.space-icon:hover {
+  transform: scale(1.1);
+}
+
+.space-icon.selected {
+  border: 2px solid hsl(var(--primary));
+}
+
+.space-color {
+  width: 100%;
+  height: 32px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.space-color:hover {
+  transform: scale(1.05);
+}
+
+.space-color.selected {
+  border: 2px solid hsl(var(--primary));
+}
+
+/* Vision OS inspired styles */
+.vision-card {
+  @apply rounded-2xl overflow-hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.vision-button {
+  @apply rounded-full px-6;
+}
+
+.vision-input {
+  @apply rounded-xl;
+}
+
+/* Optimized animations */
+@keyframes subtle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.subtle-float {
+  animation: subtle-float 5s ease-in-out infinite;
+}
+
+/* Optimized calendar */
+.optimized-calendar {
+  contain: content;
+  content-visibility: auto;
+}
+
+/* Space management */
+.space-item {
+  @apply flex items-center justify-between p-3 rounded-xl transition-all;
+}
+
+.space-item:hover {
+  @apply bg-primary/10;
+}
+
+.space-actions {
+  @apply opacity-0 transition-opacity;
+}
+
+.space-item:hover .space-actions {
+  @apply opacity-100;
+}
+
